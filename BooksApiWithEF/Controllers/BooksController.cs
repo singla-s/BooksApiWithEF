@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BooksApiWithEF.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
+using BooksApiWithEF.Filters;
 
 namespace BooksApiWithEF.Controllers
 {

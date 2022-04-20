@@ -1,4 +1,5 @@
 using BooksApiWithEF.Models;
+using BooksApiWithEF.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,11 @@ namespace BooksApiWithEF
             services.AddDbContext<BooksDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("BooksDbContext"));
+            });
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new ActionLogFilterAttribute());
             });
         }
 
