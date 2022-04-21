@@ -9,10 +9,11 @@ using BooksApiWithEF.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using BooksApiWithEF.Filters;
 
-namespace BooksApiWithEF.Controllers
+namespace BooksApiWithEF.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class BooksController : ControllerBase
     {
         private readonly BooksDbContext _context;
@@ -24,9 +25,9 @@ namespace BooksApiWithEF.Controllers
 
         // GET: api/Books
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        public async Task<ActionResult<Book>> GetBooks()
         {
-            return await _context.Books.ToListAsync();
+           return await _context.Books.FirstOrDefaultAsync();
         }
 
         // GET: api/Books/5

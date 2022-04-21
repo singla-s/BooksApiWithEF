@@ -31,6 +31,14 @@ namespace BooksApiWithEF
         {
 
             services.AddControllers();
+
+
+            services.AddApiVersioning(optioms =>
+            {
+                optioms.DefaultApiVersion = new ApiVersion(1, 0);
+                optioms.AssumeDefaultVersionWhenUnspecified = true;
+                optioms.ReportApiVersions = true;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BooksApiWithEF", Version = "v1" });
@@ -41,10 +49,12 @@ namespace BooksApiWithEF
                 options.UseSqlServer(Configuration.GetConnectionString("BooksDbContext"));
             });
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new ActionLogFilterAttribute());
-            });
+            //add api versioning support
+
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add(new ActionLogFilterAttribute());
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
